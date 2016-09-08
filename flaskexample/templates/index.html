@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<!-- PUT ALL BUTTON FUNCTIONS HERE --> 
+<script type="text/javascript">
+  $(function() {
+    $("#submitBtn").click(function() {
+         $.ajax({
+            type: "GET",
+            url: $SCRIPT_ROOT + "/echo/",
+            contentType: "application/json; charset=utf-8",
+            data: { echoValue: $('input[name="echoText"]').val() },
+            success: function(data) {
+                $('#echoResult').text(data.value);
+            }
+        });     
+    });
+  });
+  
+  $(function() {
+    $("#submitBtn2").click(function() {
+         $.ajax({
+            type: "GET",
+            url: $SCRIPT_ROOT + "/echo/",
+            contentType: "application/json; charset=utf-8",
+            data: { echoValue: $('input[name="echoText2"]').val() },
+            success: function(data) {
+                $('#echoResult2').text(data.value);
+            }
+        });     
+    });
+  });
+
+</script>
+
+<strong>Enter a value to echo back:</strong>
+<input type="text" size="10" id="echoText" name="echoText">
+<button type="button" id="submitBtn" name="submitBtn">Submit via AJAX</button><br><br>
+<strong><div id="echoResult"></div></strong>
+
+<strong>Enter another value to echo back:</strong>
+<input type="range" value="2" min="0" max="10" step="1" id="echoText2" name="echoText2">
+<button type="button" id="submitBtn2" name="submitBtn2">Submit via AJAX</button><br><br>
+<strong><div id="echoResult2"></div></strong>
+
+{% endblock %}
